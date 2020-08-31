@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+{% block title %}MediAPI{% endblock %}
+{% block content %}
+
+
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="./">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Heart Disease Predictor</li>
+  </ol>
+</nav>
+
+<div class="container h-100">
+
+  <div class="form-row">
+    <div class="col center-block">
+      <div class="alert alert-primary" role="alert">
+        <h4 class="alert-heading">How to use</h4>
+        <p>The attributes described below are used to determine the presence of heart disease in a patient. Only whole
+           numbers/decimals can be entered. After entering the values and pressing the predict button, the model will
+           evaluate and return a prediction.</p>
+        <hr>
+        <p class="mb-0">Attributes:</p>
+        <ul>
+          <li>Age: patient's age</li>
+          <li>Sex: patient's sex (1 = male; 0 = female)</li>
+          <li>CP: chest pain type (0-3)</li>
+          <li>TRESTBPS: resting blood pressure</li>
+          <li>CHOL: serum cholestoral in mg/dl</li>
+          <li>FBS: fasting blood sugar (1 = true; 0 = false)</li>
+          <li>RESTECG: resting electrocardiographic results (0-2)</li>
+          <li>THALACH: maximum heart rate achieved</li>
+          <li>EXANG: exercise induced angina (1 = yes; 0 = no) </li>
+          <li>OLDPEAK: ST depression induced by exercise relative to rest</li>
+          <li>Slope: slope of the peak exercise ST segment (0-2)</li>
+          <li>CA: number of major vessels colored by flourosopy (0-4)</li>
+          <li>THAL: 3 = normal; 6 = fixed defect; 7 = reversable defect</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+<div class="card mx-auto mb-5 text-center">
+  <div class="card-header">
+    Heart Disease Prediction Form
+  </div>
+  <div class="card-body">
+    <div class="d-flex justify-content-center align-items-center container">
+
+
+<form action="/formpredheart" method="POST">
+
+  <div class="form-row">
+    <div class="col center-block">
+      <label for="age" class="col-form-label">Age</label>
+      <input type="number" step="1" min="0" class="form-control" id="age" name="age" required>
+    </div>
+
+    <div class="col center-block">
+      <label for="sex" class="col-form-label">Sex</label>
+      <input type="number" step="1" min="0" max="1" class="form-control" id="sex" name="sex" required>
+    </div>
+  </div>
+
+    <div class="form-row">
+    <div class="col center-block">
+      <label for="cp" class="col-form-label">CP</label>
+      <input type="number" step="1" min="0" max="3" class="form-control" id="cp" name="cp" required>
+    </div>
+
+    <div class="col center-block">
+      <label for="trestbps" class="col-form-label">TRESTBPS</label>
+      <input type="number" step="1" min="0" class="form-control" id="trestbps" name="trestbps" required>
+    </div>
+    </div>
+
+    <div class="form-row">
+    <div class="col center-block">
+      <label for="chol" class="col-form-label">CHOL</label>
+      <input type="number" step="1" min="0" class="form-control" id="chol" name="chol" required>
+    </div>
+
+    <div class="col center-block">
+      <label for="fbs" class="col-form-label">FBS</label>
+      <input type="number" step="1" min="0" max="1" class="form-control" id="fbs" name="fbs" required>
+    </div>
+    </div>
+
+    <div class="form-row">
+    <div class="col center-block">
+      <label for="restecg" class="col-form-label">RESTECG</label>
+      <input type="number" step="1" min="0" max="2" class="form-control" id="restecg" name="restecg" required>
+    </div>
+
+    <div class="col center-block">
+      <label for="thalach" class="col-form-label">THALACH</label>
+      <input type="number" step="1" min="0" class="form-control" id="thalach" name="thalach" required>
+    </div>
+    </div>
+
+    <div class="form-row">
+    <div class="col center-block">
+      <label for="exang" class="col-form-label">EXANG</label>
+      <input type="number" step="1" min="0" max="1" class="form-control" id="exang" name="exang" required>
+    </div>
+
+    <div class="col center-block">
+      <label for="oldpeak" class="col-form-label">OLDPEAK</label>
+      <input type="number" step="any" min="0" class="form-control" id="oldpeak" name="oldpeak" required>
+    </div>
+    </div>
+
+    <div class="form-row">
+    <div class="col center-block">
+      <label for="slope" class="col-form-label">Slope</label>
+      <input type="number" step="any" min="0" class="form-control" id="slope" name="slope" required>
+    </div>
+
+    <div class="col center-block">
+      <label for="ca" class="col-form-label">CA</label>
+      <input type="number" step="any" min="0" class="form-control" id="ca" name="ca" required>
+    </div>
+    </div>
+
+    <div class="form-row">
+    <div class="col center-block">
+      <label for="thal" class="col-form-label">THAL</label>
+      <input type="number" step="any" min="0" class="form-control" id="thal" name="thal" required>
+    </div>
+
+    </div>
+
+  <div class="form-row">
+    <div class="col center-block">
+      <hr>
+      <button type="submit" class="btn btn-primary btn-block" value="predict" id="predict">Predict</button>
+    </div>
+  </div>
+
+
+</form>
+
+</div>
+
+</div>
+
+  <div class="card-footer text-muted">
+    Prediction: {{pred}}
+  </div>
+
+</div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,99 @@
+{% extends "base.html" %}
+{% block title %}MediAPI{% endblock %}
+{% block content %}
+
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><a href="./">Home</a></li>
+    <li class="breadcrumb-item active" aria-current="page">Breast Cancer Predictor</li>
+  </ol>
+</nav>
+
+<div class="container h-100">
+
+  <div class="form-row">
+    <div class="col center-block">
+      <div class="alert alert-primary" role="alert">
+        <h4 class="alert-heading">How to use</h4>
+        <p>The attributes described below are used to determine the presence of breast cancer in a patient. Only whole
+           numbers/decimals can be entered. After entering the values and pressing the predict button, the model will
+           evaluate and return a prediction. The values refer to a lump found following inspection by a doctor.</p>
+        <hr>
+        <p class="mb-0">Attributes:</p>
+        <ul>
+          <li>Mean Radius</li>
+          <li>Mean Texture</li>
+          <li>Mean Perimeter</li>
+          <li>Mean Area</li>
+          <li>Mean Smoothness</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+<div class="card mx-auto mb-5 text-center">
+  <div class="card-header">
+    Breast Cancer Prediction Form
+  </div>
+  <div class="card-body">
+    <div class="d-flex justify-content-center align-items-center container">
+
+<form action="/formpredcancer" method="POST">
+
+  <div class="form-row">
+    <div class="col center-block">
+      <label for="mean_radius" class="col-form-label">Mean Radius</label>
+      <input type="number" step="any" min="0" class="form-control" id="mean_radius" name="mean_radius" required>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="col center-block">
+      <label for="mean_texture" class="col-form-label">Mean Texture</label>
+      <input type="number" step="any" min="0" class="form-control" id="mean_texture" name="mean_texture" required>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="col center-block">
+      <label for="mean_perimeter" class="col-form-label">Mean Perimeter</label>
+      <input type="number" step="any" min="0"  class="form-control" id="mean_perimeter" name="mean_perimeter" required>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="col center-block">
+      <label for="mean_area" class="col-form-label">Mean Area</label>
+      <input type="number" step="any" min="0" class="form-control" id="mean_area" name="mean_area" required>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="col center-block">
+      <label for="mean_smoothness" class="col-form-label">Mean Smoothness</label>
+      <input type="number" step="any" min="0" class="form-control" id="mean_smoothness" name="mean_smoothness" required>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="col center-block">
+      <hr>
+      <button type="submit" class="btn btn-primary btn-block" value="predict" id="predict">Predict</button>
+    </div>
+  </div>
+
+</form>
+
+</div>
+
+  </div>
+
+  <div class="card-footer text-muted">
+    Prediction: {{pred}}
+  </div>
+
+</div>
+
+</div>
+
+{% endblock %}

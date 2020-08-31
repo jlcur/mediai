@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block title %}MediAPI{% endblock %}
+{% block content %}
+
+<!-- -->
+<nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item active" aria-current="page">Home</li>
+      </ol>
+</nav>
+
+<div class="container h-100">
+
+    <div class="card">
+  <div class="card-header">
+    MediAPI
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Welcome to MediAPI</h5>
+    <p class="card-text">An user friendly interface for predicting heart disease, diabetes, or breast cancer in a
+        patient. Predictions are made using machine learning models built with Keras and Tensorflow.</p>
+
+      <p class="card-text">To get started, select one of the models below.</p>
+
+      <div class="btn-group" role="group" aria-label="Basic example">
+      <a class="btn btn-primary" href="/heart" role="button">Heart Disease</a>
+      <a class="btn btn-primary" href="/diabetes" role="button">Diabetes</a>
+      <a class="btn btn-primary" href="/cancer" role="button">Breast Cancer</a>
+      </div>
+
+  </div>
+</div>
+</div>
+
+{% endblock %}
