@@ -45,33 +45,27 @@ def breastcancer():
 def predicth():
     global result_heart
 
-    # Get values from form
-    data = [request.form["age"],
-            request.form["sex"],
-            request.form["cp"],
-            request.form["trestbps"],
-            request.form["chol"],
-            request.form["fbs"],
-            request.form["restecg"],
-            request.form["thalach"],
-            request.form["exang"],
-            request.form["oldpeak"],
-            request.form["slope"],
-            request.form["ca"],
-            request.form["thal"]]
-
-    # Convert values to numpy array
-    data = np.array([np.asarray(data, dtype=float)])
+    age = request.form.get("age", type=int)
+    sex = request.form.get("sex", type=int)
+    cp = request.form.get("cp", type=int)
+    trestbps = request.form.get("trestbps", type=int)
+    chol = request.form.get("chol", type=int)
+    fbs = request.form.get("fbs", type=int)
+    restecg = request.form.get("restecg", type=int)
+    thalach = request.form.get("thalach", type=int)
+    exang = request.form.get("exang", type=int)
+    oldpeak = request.form.get("oldpeak", type=float)
+    slope = request.form.get("slope", type=int)
+    ca = request.form.get("ca", type=int)
+    thal = request.form.get("thal", type=int)
 
     # Make prediction
-    prediction = model_heart.predict_classes(data)
+    prediction = model_heart.predict_classes([[age, sex, cp, trestbps, chol, fbs, restecg, thalach, exang, oldpeak,
+                                               slope, ca, thal]])
 
-    # Assign prediction to value
-    pred = np.where(prediction == np.amax(prediction, axis=1))[1][0]
-
-    if pred == 0:
+    if prediction == 0:
         result_heart = "Heart disease not present"
-    elif pred == 1:
+    elif prediction == 1:
         result_heart = "Heart disease present"
 
     return render_template("heart.html", pred=result_heart)
@@ -82,28 +76,22 @@ def predicth():
 def predictd():
     global result_diabetes
 
-    # Get values from form
-    data = [request.form["pregnancies"],
-            request.form["glucose"],
-            request.form["bloodpressure"],
-            request.form["skinthickness"],
-            request.form["insulin"],
-            request.form["bmi"],
-            request.form["dpf"],
-            request.form["age"]]
-
-    # Convert values to numpy array
-    data = np.array([np.asarray(data, dtype=float)])
+    pregnancies = request.form.get("pregnancies", type=int)
+    glucose = request.form.get("glucose", type=int)
+    bloodpressure = request.form.get("bloodpressure", type=int)
+    skinthickness = request.form.get("skinthickness", type=int)
+    insulin = request.form.get("insulin", type=int)
+    bmi = request.form.get("bmi", type=float)
+    dpf = request.form.get("dpf", type=float)
+    age = request.form.get("age", type=int)
 
     # Make prediction
-    prediction = model_diabetes.predict_classes(data)
+    prediction = model_diabetes.predict_classes([[pregnancies, glucose, bloodpressure, skinthickness, insulin, bmi,
+                                                  dpf, age]])
 
-    # Assign prediction to value
-    pred = np.where(prediction == np.amax(prediction, axis=1))[1][0]
-
-    if pred == 0:
+    if prediction == 0:
         result_diabetes = "Diabetes not present"
-    elif pred == 1:
+    elif prediction == 1:
         result_diabetes = "Diabetes present"
 
     return render_template("diabetes.html", pred=result_diabetes)
@@ -114,25 +102,19 @@ def predictd():
 def predictbc():
     global result_cancer
 
-    # Get values from form
-    data = [request.form["mean_radius"],
-            request.form["mean_texture"],
-            request.form["mean_perimeter"],
-            request.form["mean_area"],
-            request.form["mean_smoothness"]]
-
-    # Convert values to numpy array
-    data = np.array([np.asarray(data, dtype=float)])
+    mean_radius = request.form.get("mean_radius", type=float)
+    mean_texture = request.form.get("mean_texture", type=float)
+    mean_perimeter = request.form.get("mean_perimeter", type=float)
+    mean_area = request.form.get("mean_area", type=float)
+    mean_smoothness = request.form.get("mean_smoothness", type=float)
 
     # Make prediction
-    prediction = model_breast_cancer.predict_classes(data)
+    prediction = model_breast_cancer.predict_classes([[mean_radius, mean_texture, mean_perimeter, mean_area,
+                                                       mean_smoothness]])
 
-    # Assign prediction to value
-    pred = np.where(prediction == np.amax(prediction, axis=1))[1][0]
-
-    if pred == 0:
+    if prediction == 0:
         result_cancer = "Breast cancer not present"
-    elif pred == 1:
+    elif prediction == 1:
         result_cancer = "Breast cancer present"
 
     return render_template("cancer.html", pred=result_cancer)
