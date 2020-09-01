@@ -76,6 +76,7 @@ def predicth():
 def predictd():
     global result_diabetes
 
+
     pregnancies = request.form.get("pregnancies", type=int)
     glucose = request.form.get("glucose", type=int)
     bloodpressure = request.form.get("bloodpressure", type=int)
@@ -101,6 +102,7 @@ def predictd():
 @app.route("/formpredcancer", methods=['POST'])
 def predictbc():
     global result_cancer
+
 
     mean_radius = request.form.get("mean_radius", type=float)
     mean_texture = request.form.get("mean_texture", type=float)
